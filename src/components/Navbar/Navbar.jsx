@@ -2,7 +2,10 @@ import { Link } from 'react-router-dom'
 import logo from '../../assets/logo.svg'
 import { IoBagOutline } from "react-icons/io5";
 import { CiSearch } from "react-icons/ci";
+import { useContext } from 'react';
+import { AuthContext } from '../Providers/Providers';
 const Navbar = () => {
+  const {user}=useContext(AuthContext)
   return (
     <div className='mt-5 shadow-md' >
         <div className='flex justify-between px-5 items-center mx-6'>
@@ -13,7 +16,14 @@ const Navbar = () => {
             <Link to={'/services'}>Services</Link>
             <Link to={'blogs'}>Blogs</Link>
             <Link to={'/contact'}>Contact</Link>
-            <Link to={'/login'}>Login</Link>
+            {
+              user? <>
+                <Link to={'/bookings'}>My Bookings</Link>
+                <Link to={'/login'}>Sign OUt</Link>
+              </>: <Link to={'/login'}>Login</Link>
+             
+            }
+           
         </div>
         <div className='ml-3 flex gap-3 items-center'>
              <IoBagOutline></IoBagOutline>
